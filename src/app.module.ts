@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { SequelizeModule } from "@nestjs/sequelize";
 import { TodosModule } from "./todos/todos.module";
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule } from "@nestjs/config";
 import { Todo } from "./todos/todos.model";
 
 @Module({
@@ -9,7 +9,7 @@ import { Todo } from "./todos/todos.model";
   providers: [],
   imports: [
     ConfigModule.forRoot({
-        envFilePath: '.env'
+      envFilePath: ".env",
     }),
     SequelizeModule.forRoot({
       dialect: "postgres",

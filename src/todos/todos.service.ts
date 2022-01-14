@@ -18,23 +18,23 @@ export class TodosService {
   }
 
   async getTodo(id: number) {
-      
     if (!id) return null;
-    const todo = await this.todoRepository.findOne({where: {id}});
+    const todo = await this.todoRepository.findOne({ where: { id } });
     return todo;
   }
 
-  async updateTodo(id: number, dto: CreateToDoDto) {
-    
-    const toUpdate = await this.todoRepository.findOne({where: {id}});
-    toUpdate.title = dto.title;
-    return toUpdate;
+  async updateTodo(id: number, todoTitle: string) {
+    await this.todoRepository.update(
+      { title: todoTitle },
+      {
+        where: {
+          id: id,
+        },
+      }
+    );
   }
 
-
   async deleteTodo(id: number) {
-
-    const todo = await this.todoRepository.findOne({where: {id}});
-    this.todoRepository.destroy({where: {id}})
+    await this.todoRepository.destroy({ where: { id } });
   }
 }
