@@ -23,18 +23,31 @@ export class TodosService {
     return todo;
   }
 
-  async updateTodo(id: number, todoTitle: string) {
+  async updateTodoTitle(id: number, todoTitle: string) {
     await this.todoRepository.update(
       { title: todoTitle },
       {
         where: {
-          id: id,
+           id,
+        },
+      }
+    );
+  }
+
+  async updateTodoComplete(id: number, completed: boolean) {
+    await this.todoRepository.update(
+      { isCompleted: completed},
+      {
+        where: {
+           id,
         },
       }
     );
   }
 
   async deleteTodo(id: number) {
-    await this.todoRepository.destroy({ where: { id } });
+    await this.todoRepository.destroy({
+      where: { id }
+    });
   }
 }

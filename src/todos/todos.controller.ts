@@ -15,27 +15,34 @@ export class TodosController {
   constructor(private todosService: TodosService) {}
 
   @Post()
-  createTodo(@Body() todoDto: CreateToDoDto) {
+  async createTodo(@Body() todoDto: CreateToDoDto) {
     return this.todosService.createToDo(todoDto);
   }
 
   @Get()
-  getAll() {
+  async getAll() {
     return this.todosService.getAllTodos();
   }
 
   @Get("/:id")
-  getTodo(@Param("id") id: number) {
+  async getTodo(@Param("id") id: number) {
     return this.todosService.getTodo(id);
   }
 
-  @Patch("/:id")
-  updateTodo(@Param("id") id: number, @Body("title") todoTitle: string) {
-    return this.todosService.updateTodo(id, todoTitle);
+  @Patch("/:id/completed")
+  async updateTodoComplete(@Param("id") id: number, @Body("isCompleted") completed: boolean) {
+    return this.todosService.updateTodoComplete(id, completed);
   }
 
+  @Patch("/:id")
+  async updateTodoTitle(@Param("id") id: number, @Body("title") todoTitle: string) {
+    return this.todosService.updateTodoTitle(id, todoTitle);
+  }
+
+  
+
   @Delete("/:id")
-  deleteTodo(@Param("id") id: number) {
+  async deleteTodo(@Param("id") id: number) {
     this.todosService.deleteTodo(id);
   }
 }
